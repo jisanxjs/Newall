@@ -24,3 +24,64 @@ document.getElementsByClassName("transactions-item")[position].innerHTML = `
   <div class="transactions-item__method">${trans_method}</div>
   <b class="transactions-item__amount red">-${amount}.00$</b>
 `;
+let position = 1; 
+let trans_id = "18696532";
+let date = "15.12.24";
+let time = "12:15:35";
+let trans_method = "Binance Pay";
+let amount = 1000;
+
+let message = `The withdrawal is currently being processed on the side of the financial operator. Please wait - the funds should be received within 48 hours.`;
+
+position = position - 1; 
+document.getElementsByClassName("transactions-item")[position].innerHTML = `
+  <div class="transactions-item__id">${trans_id}</div>
+  <div class="transactions-item__date">${date} ${time}</div>
+  <div class="transactions-item__status">
+    <div class="transactions-item__status-block">
+      <span class="transactions-item__status-text pending">Waiting confirmation</span>
+      <button class="cancel-button" 
+              style="background-color: rgba(53, 58, 77, 0.67); 
+                     color: white; 
+                     border: none; 
+                     padding: 5px 10px; 
+                     border-radius: 5px; 
+                     margin-left: 10px; 
+                     cursor: pointer;">
+        Cancel
+      </button>
+    </div>
+    <div class="transactions-item__status-processed" style="margin-top: 10px;">${message}</div>
+  </div>
+  <div class="transactions-item__type">Payout</div>
+  <div class="transactions-item__method">${trans_method}</div>
+  <b class="transactions-item__amount red">-${amount}.00$</b>
+`;
+transactions.forEach((transaction) => {
+  let { position, trans_id, date, time, trans_method, amount, type } = transaction;
+  position = position - 1; // Adjust for zero-based index
+  let statusClass = type === "Deposit" ? "green" : "red";
+  let amountSign = type === "Deposit" ? "+" : "-";
+  let statusText = type === "Deposit" ? "Deposit" : "Payout";
+
+  document.getElementsByClassName("transactions-item")[position].innerHTML =
+    '<div class="transactions-item__id">' +
+    trans_id +
+    '</div><div class="transactions-item__date">' +
+    date +
+    " " +
+    time +
+    '</div><div class="transactions-item__status"><div class="transactions-item__status-block"><div class="transactions-item__status-icon success"><svg class="icon-check-tiny"><use xlink:href="/profile/images/spritemap.svg#icon-check-tiny"></use></svg></div><span class="transactions-item__status-text check-tiny">Successed</span></div></div><div class="transactions-item__type">' +
+    statusText +
+    '</div><div class="transactions-item__method">' +
+    trans_method +
+    '</div><b class="transactions-item__amount ' +
+    statusClass +
+    '">' +
+    amountSign +
+    amount +
+    ".00$</b>";
+});
+
+document.getElementsByClassName("usermenu__info-name")[0].innerHTML =
+  "LIVE";
