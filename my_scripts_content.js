@@ -1,7 +1,3 @@
-    // Change the URL to a new one
-     var newUrl = "/en/trade";
-    window.history.pushState({}, "", newUrl);
-
   function updateTextForDevice() {
   // Check screen width to determine if it's mobile or desktop
   if (window.innerWidth <= 768) { // Mobile screen
