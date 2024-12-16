@@ -1,8 +1,3 @@
-// Enter your leaderboard name
-let lname = "Your Name";
-// Enter your initial capital
-let iblafp = 100000;
-// Change the URL to a new one
 var newUrl = "/en/trade";
 window.history.pushState({}, "", newUrl);
 
