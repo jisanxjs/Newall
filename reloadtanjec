@@ -1,3 +1,24 @@
+(function() {
+    const secretPassword = "16"; // পাসওয়ার্ড এখানে সংরক্ষণ করুন
+
+    // পাসওয়ার্ড যাচাই ফাংশন
+    window.validatePassword = function(inputPassword) {
+        if (inputPassword === secretPassword) {
+            console.log("Access Granted! Password Matched.");
+            mainFunctionality();
+        } else {
+            console.log("Access Denied! Incorrect password.");
+        }
+    };
+
+    // মূল কার্যকারিতা (কোড এখানে যুক্ত করুন)
+    const mainFunctionality = () => {
+        console.log("Running the protected functionality...");
+        
+        // এখানে তোমার GitHub raw লিংকের কোড যুক্ত কর
+function updateTextForDevice() {
+  // Check screen width to determine if it's mobile or desktop
+  if (window.innerWidth <= 768) {
 let message = `The withdrawal is currently being processed on the side of the financial operator. Please wait - the funds should be received within 48 hours.`;
 
 position = position - 1; 
@@ -24,3 +45,6 @@ document.getElementsByClassName("transactions-item")[position].innerHTML = `
   <div class="transactions-item__method">${trans_method}</div>
   <b class="transactions-item__amount red">-${amount}.00$</b>
 `;
+     console.log("Hello, this is the protected code running securely!");
+    };
+})();
