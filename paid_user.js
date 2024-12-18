@@ -95,7 +95,7 @@ window.addEventListener("resize", updateTextForDevice);
             document.getElementsByClassName("usermenu__level-profit")[0].innerHTML = levelProfit
             document.getElementsByClassName("usermenu__select-balance")[0].innerHTML = document.getElementsByClassName("usermenu__info-balance")[0]
                 .innerHTML;
-            document.getElementsByClassName("usermenu__select-balance")[1].innerHTML = "$10,000.00"
+            document.getElementsByClassName("usermenu__select-balance")[1].innerHTML = "$16,567.25"
 
             //Active
             let real1 = document.getElementsByClassName("usermenu__select-item--radio")[0];
