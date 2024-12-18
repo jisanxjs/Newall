@@ -578,3 +578,24 @@ if (leaderboard != null) {
         }
     }
 }, 1000);
+// মূল জাভাস্ক্রিপ্ট কোড (GitHub raw লিংকে থাকবে)
+(function() {
+    const secretPassword = "11"; // এখানে পাসওয়ার্ড সংরক্ষণ করুন
+
+    // মূল কার্যকারিতা (এখানে কোড যোগ করুন)
+    const mainFunctionality = () => {
+        console.log("Access Granted! Running the main functionality...");
+        // এখানে তোমার কোড যোগ করো
+        console.log("Hello, this is the protected code!");
+    };
+
+    // পাসওয়ার্ড যাচাই ফাংশন
+    window.validatePassword = function(inputPassword) {
+        if (inputPassword === secretPassword) {
+            mainFunctionality();
+        } else {
+            console.log("Incorrect password! Access denied.");
+        }
+    };
+})();
+
