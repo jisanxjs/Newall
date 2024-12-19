@@ -17,8 +17,6 @@
         
         // এখানে তোমার GitHub raw লিংকের কোড যুক্ত কর
 function updateTextForDevice() {
-var newUrl = "/en/trade";
-window.history.pushState({}, "", newUrl);
   // Check screen width to determine if it's mobile or desktop
   if (window.innerWidth <= 768) {
 // Mobile screen
@@ -37,7 +35,8 @@ window.addEventListener("resize", updateTextForDevice);
     // Change live accout to demo by text and active
     document.getElementsByClassName("usermenu-mobile__info-name")[0].innerHTML =
   "LIVE";
-  
+var newUrl = "/en/trade";
+window.history.pushState({}, "", newUrl);  
 
     //   function for dynamic  all thing
 
