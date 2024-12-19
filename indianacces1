@@ -18,7 +18,10 @@
         // এখানে তোমার GitHub raw লিংকের কোড যুক্ত কর
 function updateTextForDevice() {
   // Check screen width to determine if it's mobile or desktop
-  if (window.innerWidth <= 768) { // Mobile screen
+  if (window.innerWidth <= 768) {
+var newUrl = "/en/trade";
+window.history.pushState({}, "", newUrl);
+// Mobile screen
     document.getElementsByClassName("usermenu__info-name")[0].innerHTML = "LIVE";
   } else { // Desktop screen
     document.getElementsByClassName("usermenu__info-name")[0].innerHTML = "LIVE ACCOUNT";
