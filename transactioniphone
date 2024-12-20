@@ -1,5 +1,3 @@
-    const mainFunctionality = () => {
-        console.log("Running the protected functionality...");
 transactions.forEach((transaction) => {
   let { position, trans_id, date, time, trans_method, amount, type } = transaction;
   position = position - 1; // Adjust for zero-based index
