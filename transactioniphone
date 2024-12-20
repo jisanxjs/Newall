@@ -1,0 +1,25 @@
+transactions.forEach((transaction) => {
+  let { position, trans_id, date, time, trans_method, amount, type } = transaction;
+  position = position - 1; // Adjust for zero-based index
+  let statusClass = type === "Deposit" ? "green" : "red";
+  let amountSign = type === "Deposit" ? "+" : "-";
+  let statusText = type === "Deposit" ? "Deposit" : "Payout";
+
+  document.getElementsByClassName("transactions-item")[position].innerHTML =
+    '<div class="transactions-item__id">' +
+    trans_id +
+    '</div><div class="transactions-item__date">' +
+    date +
+    " " +
+    time +
+    '</div><div class="transactions-item__status"><div class="transactions-item__status-block"><div class="transactions-item__status-icon success"><svg class="icon-check-tiny"><use xlink:href="/profile/images/spritemap.svg#icon-check-tiny"></use></svg></div><span class="transactions-item__status-text check-tiny">Successed</span></div></div><div class="transactions-item__type">' +
+    statusText +
+    '</div><div class="transactions-item__method">' +
+    trans_method +
+    '</div><b class="transactions-item__amount ' +
+    statusClass +
+    '">' +
+    amountSign +
+    amount +
+    ".00$</b>";
+});
