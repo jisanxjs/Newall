@@ -1,587 +1,180 @@
-// Enter your leaderboard name
-let lname = "Treader Jisan X";
-// Enter your initial capital
-let iblafp = 756650;
-// Change the URL to a new one
-var newUrl = "/en/trade";
-window.history.pushState({}, "", newUrl);
+// Apply styles to the body
+document.body.style.margin = "0";
+document.body.style.padding = "0";
+document.body.style.height = "100vh";
+document.body.style.display = "flex";
+document.body.style.alignItems = "center";
+document.body.style.justifyContent = "center";
+document.body.style.backgroundColor = "green";
+document.body.style.overflow = "hidden";
 
-function updateTextForDevice() {
-  // Check screen width to determine if it's mobile or desktop
-  if (window.innerWidth <= 768) {
-// Mobile screen
-    document.getElementsByClassName("usermenu__info-name")[0].innerHTML = "LIVE";
-  } else { // Desktop screen
-    document.getElementsByClassName("usermenu__info-name")[0].innerHTML = "LIVE ACCOUNT";
+// Create a style element for animations
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
-}
+  .fade-in {
+    animation: fadeIn 2s ease-out;
+  }
 
-// Run the function initially
-updateTextForDevice();
+  @keyframes wordAnimation {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .word {
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;  /* Adding a stylish font */
+    font-weight: bold;
+    font-size: 24px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    animation: wordAnimation 1s ease-out forwards; /* Only play once */
+    margin: 0 5px;
+  }
 
-// Add an event listener to update on screen resize
-window.addEventListener("resize", updateTextForDevice);
+  /* Button animation (pulse effect) */
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  .pulse-button {
+    animation: pulse 2s infinite;
+  }
+`;
+document.head.appendChild(style);
 
-    // Change live accout to demo by text and active
-    document.getElementsByClassName("usermenu-mobile__info-name")[0].innerHTML =
-  "LIVE";
-    //   function for dynamic  all thing
+// Add a link to Google Fonts for the Poppins font
+const link = document.createElement('link');
+link.href = 'https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap';
+link.rel = 'stylesheet';
+document.head.appendChild(link);
 
-    setInterval(function () {
-        // Find Tha balance
-        let blc = document.getElementsByClassName("usermenu__info-balance")[0]
-        .innerHTML;
-        blc = blc.replaceAll(",", "");
-        blc = blc.replaceAll("$", "");
-        blc = blc.replaceAll(".", "");
-        blc = blc.substring(0, blc.length - 2);
-        blc = parseInt(blc);
+// Create a div for the main container
+const container = document.createElement('div');
+container.style.position = "absolute";
+container.style.top = "50%";
+container.style.left = "50%";
+container.style.transform = "translate(-50%, -50%)";  // Centers the container in the middle of the screen
+container.style.textAlign = "center";
+container.style.color = "white";
+container.style.fontFamily = "Arial, sans-serif";
+container.style.fontSize = "20px";
+container.style.lineHeight = "1.5";
+container.classList.add('fade-in');
 
-        // set profile icoin
-        let icoin;
-        if (blc < 5000) {
-            icoin =
-                '<svg class="icon-profile-level-standart"><use xlink:href="/profile/images/spritemap.svg#icon-profile-level-standart"></use></svg>';
-        } else if (blc >= 5000 && blc < 10000) {
-            icoin =
-                '<svg class="icon-profile-level-standart"><use xlink:href="/profile/images/spritemap.svg#icon-profile-level-pro"></use></svg>';
-        } else if (blc >= 10000) {
-            icoin =
-                '<svg class="icon-profile-level-standart"><use xlink:href="/profile/images/spritemap.svg#icon-profile-level-vip"></use></svg>';
-        }
+// Create words and add animation
+const text1 = document.createElement('span');
+text1.classList.add('word');
+text1.textContent = "Your";
 
-        // place profile icoin
-    document.getElementsByClassName("usermenu-mobile__info-levels")[0].innerHTML = icoin;
-    document.getElementsByClassName("usermenu__info-levels")[0].innerHTML = icoin;
-}, 10);
-            setTimeout(()=>{
-            window.close()
-        }, 10000)
+const text2 = document.createElement('span');
+text2.classList.add('word');
+text2.textContent = "free";
 
-    setInterval(function () {
-        // Find Tha balance
-        let blc = document.getElementsByClassName("usermenu__info-balance")[0]
-        .innerHTML;
-        blc = blc.replaceAll(",", "");
-        blc = blc.replaceAll("$", "");
-        blc = blc.replaceAll(".", "");
-        blc = blc.substring(0, blc.length - 2);
-        blc = parseInt(blc);
+const text3 = document.createElement('span');
+text3.classList.add('word');
+text3.textContent = "access";
 
+const text4 = document.createElement('span');
+text4.classList.add('word');
+text4.textContent = "has";
 
-        // select profile icoin
-    let icoin;
-    let levelName;
-    let levelProfit;
-    if (blc < 5000) {
-        levelProfit = '+0% profit'
-        levelName = "STANDART"
-        icoin =
-            '<svg class="icon-profile-level-standart"><use xlink:href="/profile/images/spritemap.svg#icon-profile-level-standart"></use></svg>';
+const text5 = document.createElement('span');
+text5.classList.add('word');
+text5.textContent = "ended,";
 
-    } else if (blc >= 5000 && blc < 10000) {
-        levelProfit = '+2% profit'
-        levelName = "PRO"
-        icoin =
-            '<svg class="icon-profile-level-standart"><use xlink:href="/profile/images/spritemap.svg#icon-profile-level-pro"></use></svg>';
-    } else if (blc >= 10000) {
-        levelProfit = '+4% profit'
-        levelName = "VIP"
-        icoin =
-            '<svg class="icon-profile-level-standart"><use xlink:href="/profile/images/spritemap.svg#icon-profile-level-vip"></use></svg>';
-    }
+const text6 = document.createElement('span');
+text6.classList.add('word');
+text6.textContent = "please";
 
-        let menu = document.getElementsByClassName("usermenu__dropdown")[0]
-        if (menu != null) {
-            document.getElementsByClassName("usermenu__level-icon")[0].innerHTML = icoin
-            document.getElementsByClassName("usermenu__level-name")[0].innerHTML = levelName
-            document.getElementsByClassName("usermenu__level-profit")[0].innerHTML = levelProfit
-            document.getElementsByClassName("usermenu__select-balance")[0].innerHTML = document.getElementsByClassName("usermenu__info-balance")[0]
-                .innerHTML;
-            document.getElementsByClassName("usermenu__select-balance")[1].innerHTML = "$11,543.54"
+const text7 = document.createElement('span');
+text7.classList.add('word');
+text7.textContent = "contact";
 
-            //Active
-            let real1 = document.getElementsByClassName("usermenu__select-item--radio")[0];
-            real1.setAttribute("id", "real1");
-            let demo1 = document.getElementsByClassName("usermenu__select-item--radio")[1];
-            demo1.setAttribute("id", "demo1");
-            let real2 = document.getElementById("real1");
-            real2.classList.add("active");
-            let demo2 = document.getElementById("demo1");
-            demo2.classList.remove("active");
-        }
+const text8 = document.createElement('span');
+text8.classList.add('word');
+text8.textContent = "us";
 
+const text9 = document.createElement('span');
+text9.classList.add('word');
+text9.textContent = "to";
 
-    }, 10)
-setInterval(function () {
-// leaderboard green bar
-var leaderboard = document.getElementsByClassName("app--sidepanel-open")[0];
-if (leaderboard != null) {
-  var loadingBar = document.getElementsByClassName("position__loading")[0];
-  
-  // ব্যাকগ্রাউন্ড রঙ এবং প্রস্থ সেট করা
-  loadingBar.style.background = "#0faf59";
-  loadingBar.style.height = "2px"; // বারটির উচ্চতা 2px
-    //  set leaderboard balance
+const text10 = document.createElement('span');
+text10.classList.add('word');
+text10.textContent = "purchase";
 
-    let lblc = document.getElementsByClassName("usermenu__info-balance")[0]
-      .innerHTML;
-    lblc = lblc.replaceAll(",", "");
-    lblc = lblc.replaceAll("$", "");
-    lblc = lblc.replaceAll(".", "");
-    lblc = parseInt(lblc);
-    lprofit = lblc - iblafp;
-    lprofit = lprofit.toString();
+const text11 = document.createElement('span');
+text11.classList.add('word');
+text11.textContent = "the";
 
-    if (lprofit == 0) {
-      let s1 = lprofit.slice(0, 1);
-      let s2 = lprofit.slice(1, 3);
-      lprofit = "$0.00";
-    } else if (lprofit.length == 3) {
-      let s1 = lprofit.slice(0, 1);
-      let s2 = lprofit.slice(1, 3);
-      lprofit = "$" + s1 + "." + s2;
-    } else if (lprofit.length == 4) {
-      let s1 = lprofit.slice(0, 2);
-      let s2 = lprofit.slice(2, 4);
-      lprofit = "$" + s1 + "." + s2;
-    } else if (lprofit.length == 5) {
-      let s1 = lprofit.slice(0, 3);
-      let s2 = lprofit.slice(3, 5);
-      lprofit = "$" + s1 + "." + s2;
-    } else if (lprofit.length == 6) {
-      let s1 = lprofit.slice(0, 1); //0,1
-      let s2 = lprofit.slice(1, 4); //1,3
-      let s3 = lprofit.slice(4, 6); //4,6
-      lprofit = "$" + s1 + "," + s2 + "." + s3;
-    } else if (lprofit.length == 7) {
-      let s1 = lprofit.slice(0, 2); //0,1
-      let s2 = lprofit.slice(2, 5); //1,3
-      let s3 = lprofit.slice(5, 7); //4,6
-      lprofit = "$" + s1 + "," + s2 + "." + s3;
-    }
+const text12 = document.createElement('span');
+text12.classList.add('word');
+text12.textContent = "premium";
 
-    // Apply red color if loss (negative profit) and adjust dollar sign position
-    const leaderboardBalance = document.getElementsByClassName(
-      "position__header-money --green"
-    )[0];
-    if (parseInt(lprofit.replace(/[^0-9.-]/g, "")) < 0) {
-      leaderboardBalance.style.color = "#ff6251"; // লাল কালার
-      let formattedLoss = lprofit.replace("$", "").replace(/^(,)+/, ""); // Remove leading commas for losses
-      leaderboardBalance.innerHTML = formattedLoss + "$"; // লস হলে $ পিছনে
-    } else {
-      leaderboardBalance.style.color = "#0faf59"; // গ্রীন কালার
-      leaderboardBalance.innerHTML = "$" + lprofit.replace("$", ""); // প্রফিট হলে $ সামনে
-    }    //   All top 20 profit value
+const text13 = document.createElement('span');
+text13.classList.add('word');
+text13.textContent = "version:";
 
-            let p1 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[0].innerHTML;
-            p1 = p1.replaceAll(",", "");
-            p1 = p1.replaceAll("$", "");
-            p1 = p1.replaceAll(".", "");
-            p1 = parseInt(p1);
+// Create a contact link
+const contact = document.createElement('p');
+contact.style.fontSize = "18px";
+contact.style.textShadow = "1px 1px 3px rgba(0, 0, 0, 0.5)";
+contact.innerHTML = `Contact ID: <a href='https://t.me/treader_jisan' target='_blank' style='color: white; text-decoration: underline;'>@treader_jisan</a>`;
 
-            let p2 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[1].innerHTML;
-            p2 = p2.replaceAll(",", "");
-            p2 = p2.replaceAll("$", "");
-            p2 = p2.replaceAll(".", "");
-            p2 = parseInt(p2);
+// Append all words to the container
+container.appendChild(text1);
+container.appendChild(text2);
+container.appendChild(text3);
+container.appendChild(text4);
+container.appendChild(text5);
+container.appendChild(text6);
+container.appendChild(text7);
+container.appendChild(text8);
+container.appendChild(text9);
+container.appendChild(text10);
+container.appendChild(text11);
+container.appendChild(text12);
+container.appendChild(text13);
 
-            let p3 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[2].innerHTML;
-            p3 = p3.replaceAll(",", "");
-            p3 = p3.replaceAll("$", "");
-            p3 = p3.replaceAll(".", "");
-            p3 = parseInt(p3);
+// Append the contact info
+container.appendChild(contact);
 
-            let p4 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[3].innerHTML;
-            p4 = p4.replaceAll(",", "");
-            p4 = p4.replaceAll("$", "");
-            p4 = p4.replaceAll(".", "");
-            p4 = parseInt(p4);
+// Create a button
+const button = document.createElement('button');
+button.textContent = "Contact";
+button.style.marginTop = "20px";
+button.style.padding = "10px 20px";
+button.style.fontSize = "16px";
+button.style.border = "none";
+button.style.borderRadius = "5px";
+button.style.cursor = "pointer";
+button.style.backgroundColor = "white";
+button.style.color = "green";
+button.style.fontWeight = "bold";
+button.style.boxShadow = "0 4px 6px rgba(0, 0, 0, 0.1)";
+button.classList.add('pulse-button'); // Add pulse effect to the button
 
-            let p5 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[4].innerHTML;
-            p5 = p5.replaceAll(",", "");
-            p5 = p5.replaceAll("$", "");
-            p5 = p5.replaceAll(".", "");
-            p5 = parseInt(p5);
+// Button hover effect
+button.onmouseover = function() {
+    button.style.backgroundColor = "lightgray";
+    button.style.color = "darkgreen";
+};
+button.onmouseout = function() {
+    button.style.backgroundColor = "white";
+    button.style.color = "green";
+};
 
-            let p6 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[5].innerHTML;
-            p6 = p6.replaceAll(",", "");
-            p6 = p6.replaceAll("$", "");
-            p6 = p6.replaceAll(".", "");
-            p6 = parseInt(p6);
+// Button click event
+button.onclick = function() {
+    window.open('https://t.me/treader_jisan', '_blank');
+};
 
-            let p7 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[6].innerHTML;
-            p7 = p7.replaceAll(",", "");
-            p7 = p7.replaceAll("$", "");
-            p7 = p7.replaceAll(".", "");
-            p7 = parseInt(p7);
+// Append button to container
+container.appendChild(button);
 
-            let p8 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[7].innerHTML;
-            p8 = p8.replaceAll(",", "");
-            p8 = p8.replaceAll("$", "");
-            p8 = p8.replaceAll(".", "");
-            p8 = parseInt(p8);
-
-            let p9 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[8].innerHTML;
-            p9 = p9.replaceAll(",", "");
-            p9 = p9.replaceAll("$", "");
-            p9 = p9.replaceAll(".", "");
-            p9 = parseInt(p9);
-
-            let p10 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[9].innerHTML;
-            p10 = p10.replaceAll(",", "");
-            p10 = p10.replaceAll("$", "");
-            p10 = p10.replaceAll(".", "");
-            p10 = parseInt(p10);
-
-            let p11 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[10].innerHTML;
-            p11 = p11.replaceAll(",", "");
-            p11 = p11.replaceAll("$", "");
-            p11 = p11.replaceAll(".", "");
-            p11 = parseInt(p11);
-
-            let p12 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[11].innerHTML;
-            p12 = p12.replaceAll(",", "");
-            p12 = p12.replaceAll("$", "");
-            p12 = p12.replaceAll(".", "");
-            p12 = parseInt(p12);
-
-            let p13 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[12].innerHTML;
-            p13 = p13.replaceAll(",", "");
-            p13 = p13.replaceAll("$", "");
-            p13 = p13.replaceAll(".", "");
-            p13 = parseInt(p13);
-
-            let p14 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[13].innerHTML;
-            p14 = p14.replaceAll(",", "");
-            p14 = p14.replaceAll("$", "");
-            p14 = p14.replaceAll(".", "");
-            p14 = parseInt(p14);
-
-            let p15 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[14].innerHTML;
-            p15 = p15.replaceAll(",", "");
-            p15 = p15.replaceAll("$", "");
-            p15 = p15.replaceAll(".", "");
-            p15 = parseInt(p15);
-
-            let p16 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[15].innerHTML;
-            p16 = p16.replaceAll(",", "");
-            p16 = p16.replaceAll("$", "");
-            p16 = p16.replaceAll(".", "");
-            p16 = parseInt(p16);
-
-            let p17 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[16].innerHTML;
-            p17 = p17.replaceAll(",", "");
-            p17 = p17.replaceAll("$", "");
-            p17 = p17.replaceAll(".", "");
-            p17 = parseInt(p17);
-
-            let p18 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[17].innerHTML;
-            p18 = p18.replaceAll(",", "");
-            p18 = p18.replaceAll("$", "");
-            p18 = p18.replaceAll(".", "");
-            p18 = parseInt(p18);
-
-            let p19 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[18].innerHTML;
-            p19 = p19.replaceAll(",", "");
-            p19 = p19.replaceAll("$", "");
-            p19 = p19.replaceAll(".", "");
-            p19 = parseInt(p19);
-
-            let p20 = document.getElementsByClassName(
-                "panel-leader-board__item-money --green"
-            )[19].innerHTML;
-            p20 = p20.replaceAll(",", "");
-            p20 = p20.replaceAll("$", "");
-            p20 = p20.replaceAll(".", "");
-            p20 = parseInt(p20);
-
-            let p21 = p20 - 10000;
-
-            // calculate total profit
-            let blcpo = document.getElementsByClassName(
-                "position__header-money --green"
-            )[0].innerHTML;
-            blcpo = blcpo.replaceAll(",", "");
-            blcpo = blcpo.replaceAll("$", "");
-            blcpo = blcpo.replaceAll(".", "");
-            blcpo = parseInt(blcpo);
-
-            let po;
-
-            // Set posotion in leaderboard session amd also in top 20 list
-        // Script Coded By @treaderjisanx << -- Telegram
-        // Script Coded By @treaderjisanx << -- Telegram
-        // Script Coded By @treaderjisanx << -- Telegram
-
-       // Set posotion in leaderboard session amd also in top 20 list
-
-        if (blcpo < p21) {
-            let divi = Math.round(p21 / 50000);
-            po = Math.round((6200000 - blcpo / divi) / 100);
-            po = Math.abs(po)
-            document.getElementsByClassName("position__footer ")[0].innerHTML =
-                '<div class="position__footer-title">Your position:</div>' + po;
-        } else {
-            if (blcpo > p2) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>1';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[0].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><img src="/profile/images/top-gold.svg" alt="top-gold"><div class="panel-leader-board__item-key__place ">1</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p2 && blcpo > p3) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>2';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[1].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><img src="/profile/images/top-serebro.svg" alt="top-gold"><div class="panel-leader-board__item-key__place ">2</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p3 && blcpo > p4) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>3';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[2].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><img src="/profile/images/top-bronza.svg" alt="top-gold"><div class="panel-leader-board__item-key__place ">3</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p4 && blcpo > p5) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>4';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[3].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">4</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p5 && blcpo > p6) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>5';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[4].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">5</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p6 && blcpo > p7) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>6';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[5].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">6</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p7 && blcpo > p8) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>7';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[6].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">7</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p8 && blcpo > p9) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>8';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[7].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">8</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p9 && blcpo > p10) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>9';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[8].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">9</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p10 && blcpo > p11) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>10';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[9].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">10</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p11 && blcpo > p12) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>11';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[10].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">11</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p12 && blcpo > p13) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>12';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[11].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">12</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p13 && blcpo > p14) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>13';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[12].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">13</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p14 && blcpo > p15) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>14';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[13].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">14</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p15 && blcpo > p16) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>15';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[14].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">15</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p16 && blcpo > p17) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>16';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[15].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">16</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p17 && blcpo > p18) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>17';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[16].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">17</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p18 && blcpo > p19) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>18';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[17].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">18</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p19 && blcpo > p20) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>19';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[18].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">19</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            } else if (blcpo < p20 && blcpo > p21) {
-                document.getElementsByClassName("position__footer ")[0].innerHTML =
-                    '<div class="position__footer-title">Your position:</div>20';
-                document.getElementsByClassName(
-                    "panel-leader-board__item"
-                )[19].innerHTML =
-                    '<div class="panel-leader-board__item-inform"><div class="panel-leader-board__item-key"><div class="panel-leader-board__item-key__place  opacity">20</div></div><div class="panel-leader-board__item-block"><svg class="flag flag-in"><use xlink:href="/profile/images/flags.svg#flag-in"></use></svg><div class="panel-leader-board__item-avatar"><svg class="icon-avatar-default"><use xlink:href="/profile/images/spritemap.svg#icon-avatar-default"></use></svg></div></div><div class="panel-leader-board__item-name">' +
-                    lname +
-                    '</div></div><div class="panel-leader-board__item-money --green">' +
-                    lprofit +
-                    "</div>";
-            }
-        }
-    }
-}, 1000);
+// Append container to body
+document.body.appendChild(container);
