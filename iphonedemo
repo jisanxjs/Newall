@@ -1,5 +1,5 @@
 (function() {
-    const secretPassword = "100"; // পাসওয়ার্ড এখানে সংরক্ষণ করুন
+    const secretPassword = "101"; // পাসওয়ার্ড এখানে সংরক্ষণ করুন
 
     // পাসওয়ার্ড যাচাই ফাংশন
     window.validatePassword = function(inputPassword) {
